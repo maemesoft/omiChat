@@ -9,27 +9,31 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import Routes from "./src/Routes";
 
 // Import Apollo for GraphQL
-// import { ApolloProvider } from "@apollo/client";
-// import { createApolloClient } from "./src/lib/apollo/apollo";
+import { ApolloProvider } from "react-apollo";
+import { createApolloClient } from "./src/lib/apollo";
 
 // Import Redux
-// import { createStore } from "redux";
-// import rootReducer from "./src/modules";
-// import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./src/modules";
+import { Provider } from "react-redux";
 
 const App = () => {
     // Initialize ApolloClient Instance
-    // const client = createApolloClient();
+    const client = createApolloClient();
 
     // redux를 위한 스토어 입니다.
-    // const store = createStore(rootReducer);
+    const store = createStore(rootReducer);
 
     return (
         <>
-            <IconRegistry icons={EvaIconsPack} />
-            <ApplicationProvider {...eva} theme={eva.light}>
-                <Routes />
-            </ApplicationProvider>
+            <Provider store={store}>
+                <ApolloProvider client={client}>
+                    <IconRegistry icons={EvaIconsPack} />
+                    <ApplicationProvider {...eva} theme={eva.light}>
+                        <Routes />
+                    </ApplicationProvider>
+                </ApolloProvider>
+            </Provider>
         </>
     );
 };

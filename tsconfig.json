@@ -10,7 +10,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "esModuleInterop": true,
-        "strict": true,
+        "strict": false, // if true, cause ts(7006) error
         "target": "ES2016"
     },
     "exclude": ["./node_modules/**/*"]

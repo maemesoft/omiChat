@@ -23,16 +23,17 @@ function Routes() {
 
     const screenOption: StackNavigationOptions = {
         headerShown: false,
+        animationEnabled: true,
     };
 
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={TransitionScreenOptions}>
-                <Stack.Screen
+                {/* <Stack.Screen
                     name="splash"
                     component={SplashScreen}
                     options={screenOption}
-                />
+                /> */}
                 <Stack.Screen
                     name="login"
                     component={LoginScreen}

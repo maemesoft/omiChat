@@ -8,9 +8,6 @@ import {
     View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
-// @ts-ignore
-import ProfileAdd from "../../asset/join/ProfileAdd.svg";
 import useRegisterInfo from "../../hooks/useRegisterInfo";
 
 export default function RegisterProfilePicAdd() {
@@ -55,15 +52,13 @@ export default function RegisterProfilePicAdd() {
                             : require("../../asset/join/defaultProfilePic.png")
                     }
                 />
-                <ProfileAdd style={style.profileAdd} />
             </TouchableOpacity>
         </View>
     );
 }
 
 // Const Value for indicating profilePic related component's size
-const profileUnit = Dimensions.get("window").width * 0.3;
-const profileAddUnit = profileUnit * 0.3;
+const profileUnit = Dimensions.get("window").width * 0.1;
 
 const style = StyleSheet.create({
     // Style for topContainer that contains profilePic, Name
@@ -79,14 +74,5 @@ const style = StyleSheet.create({
         width: profileUnit,
         height: profileUnit,
         borderRadius: profileUnit / 2,
-    },
-
-    // Style for Profile Picture Add Icon
-    profileAdd: {
-        position: "absolute",
-        width: profileAddUnit,
-        height: profileAddUnit,
-        top: profileUnit - profileAddUnit,
-        left: profileUnit - profileAddUnit,
     },
 });

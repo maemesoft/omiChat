@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Dimensions, StyleSheet, Text } from "react-native";
 import { Button, Divider } from "@ui-kitten/components";
 
@@ -22,6 +22,10 @@ export default function RegisterPolicyAgreement({ navigation }) {
             setLocationAgreement(true);
         }
     };
+
+    useEffect(() => {
+        if (__DEV__) navigation.replace("join", { routeParam: "emailInfo" });
+    }, []);
 
     return (
         <Screen title="회원가입">

@@ -41,7 +41,7 @@ export default function useRegisterInfo() {
         [dispatch]
     );
     const setRegisterPhoneNum = useCallback(
-        (phoneNumber: string) => dispatch(setPhoneNum(phoneNumber)),
+        (phoneNumber: string) => dispatch(setPhoneNum("01012345678")),
         [dispatch]
     );
     const setRegisterNickname = useCallback(

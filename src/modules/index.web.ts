@@ -1,5 +1,5 @@
 import localForage from "localforage";
-import { combineReducers } from "redux";
+import { combineReducers, createStore } from "redux";
 import { persistReducer } from "redux-persist";
 
 import userInfoReducer from "./userInfo";
@@ -19,3 +19,5 @@ const rootReducer = combineReducers({
 export default rootReducer;
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+export const store = createStore(rootReducer);

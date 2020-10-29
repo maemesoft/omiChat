@@ -1,17 +1,16 @@
-import { gql } from "apollo-boost";
 import React, { useCallback, useEffect, useState } from "react";
-import { useLazyQuery } from "react-apollo";
+import { gql, useLazyQuery } from "@apollo/client";
 import LoginComponent from "../components/LoginComponent";
 
-const GET_LOGIN = gql`
-    query GetLogin($password: String!, $email: String!) {
-        GetLogin(password: $password, email: $email) {
-            accountID
+export default function LoginContainer({ navigation }) {
+    const GET_LOGIN = gql`
+        query GetLogin($password: String!, $email: String!) {
+            getLogin(password: $password, email: $email) {
+                accountID
+            }
         }
-    }
-`;
+    `;
 
-function LoginContainer({ navigation }) {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -28,7 +27,7 @@ function LoginContainer({ navigation }) {
 
     // 로그인 버튼이 눌리면 수행할 함수입니다
     const onLoginPress = useCallback(async () => {
-        getLogin({ variables: { email: username, password: password } });
+        getLogin({ variables: { password: password, email: username } });
     }, [username, password]);
 
     const onRegisterPress = useCallback(() => {
@@ -49,5 +48,3 @@ function LoginContainer({ navigation }) {
         />
     );
 }
-
-export default React.memo(LoginContainer);

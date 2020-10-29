@@ -1,7 +1,6 @@
 import { Button } from "@ui-kitten/components";
-import { gql } from "apollo-boost";
 import React, { useEffect } from "react";
-import { useMutation } from "react-apollo";
+import { useMutation, gql } from "@apollo/client";
 import getRegisterInfo from "../../hooks/useRegisterInfo";
 
 const SET_REGISTER = gql`
@@ -26,20 +25,25 @@ export default function RegisterProfileSubmit({ validNickname, nickname }) {
     const [setRegister, setRegisterResult] = useMutation(SET_REGISTER);
     const {
         getRegisterID,
-        getRegisterNickname,
         getRegisterPassword,
         getRegisterPhoneNum,
-        getRegisterProfilePic,
     } = getRegisterInfo();
 
     const onRegisterPress = async () => {
+        console.log(getRegisterID);
+        console.log(getRegisterPassword);
+        console.log(getRegisterPhoneNum);
+        console.log(nickname);
+
         setRegister({
             variables: {
-                phoneNum: getRegisterPhoneNum,
-                nickname: getRegisterNickname,
+                phoneNum: "01012345678",
+                nickname: nickname,
                 password: getRegisterPassword,
                 email: getRegisterID,
             },
+        }).then((result) => {
+            console.log(result);
         });
     };
 

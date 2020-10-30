@@ -44,6 +44,7 @@ export default function RegisterProfilePic({
                     <RegisterProfileSubmit
                         validNickname={validNickname}
                         nickname={nickname}
+                        navigation={navigation}
                     />
                     <Text style={style.bottomText}>
                         프로필 사진은 일부 서비스에서 상호 프로필{"\n"}

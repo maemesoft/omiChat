@@ -1,7 +1,10 @@
 import { Button } from "@ui-kitten/components";
-import React, { useEffect } from "react";
+import React from "react";
 import { useMutation, gql } from "@apollo/client";
-import getRegisterInfo from "../../hooks/useRegisterInfo";
+import useRegisterInfo from "../../hooks/useRegisterInfo";
+import useUserInfo from "../../hooks/useUserInfo";
+import { uploadProfilePicture } from "../../lib/join/profilePicture";
+import { Alert } from "react-native";
 
 const SET_REGISTER = gql`
     mutation SetRegister(
@@ -15,26 +18,24 @@ const SET_REGISTER = gql`
             nickname: $nickname
             password: $password
             email: $email
-        ) {
-            accountID
-        }
+        )
     }
 `;
 
-export default function RegisterProfileSubmit({ validNickname, nickname }) {
+export default function RegisterProfileSubmit({
+    validNickname,
+    nickname,
+    navigation,
+}) {
     const [setRegister, setRegisterResult] = useMutation(SET_REGISTER);
     const {
         getRegisterID,
         getRegisterPassword,
-        getRegisterPhoneNum,
-    } = getRegisterInfo();
+        getRegisterProfilePic,
+    } = useRegisterInfo();
+    const { setUserID, setUserNickname, setUserToken } = useUserInfo();
 
-    const onRegisterPress = async () => {
-        console.log(getRegisterID);
-        console.log(getRegisterPassword);
-        console.log(getRegisterPhoneNum);
-        console.log(nickname);
-
+    const onRegisterPress = () => {
         setRegister({
             variables: {
                 phoneNum: "01012345678",
@@ -42,9 +43,35 @@ export default function RegisterProfileSubmit({ validNickname, nickname }) {
                 password: getRegisterPassword,
                 email: getRegisterID,
             },
-        }).then((result) => {
-            console.log(result);
-        });
+        })
+            .then(async (result) => {
+                setUserID(getRegisterID);
+                setUserNickname(nickname);
+                setUserToken(result.data.setRegister);
+
+                console.log(result.data.setRegister);
+
+                // Execute Profile Upload
+                const profileUpload = await uploadProfilePicture(
+                    getRegisterProfilePic
+                );
+
+                // If Profile Upload Successed, Route to Register Complete
+                // If Profile Upload Fails, Show Alert
+                if (profileUpload === true) {
+                    navigation.replace("join", {
+                        routeParam: "registerComplete",
+                    });
+                } else {
+                    Alert.alert(
+                        "프로필 사진 오류",
+                        "프로필 사진 업로드 중 에러가 발생했습니다. 다시 시도해주세요",
+                        [{ text: "OK" }],
+                        { cancelable: false }
+                    );
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
     return (

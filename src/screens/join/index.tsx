@@ -1,4 +1,5 @@
 import React from "react";
+import RegisterComplete from "./RegisterComplete";
 import RegisterEmail from "./RegisterEmail";
 import RegisterPolicyAgreement from "./RegisterPolicyAgreement";
 import RegisterProfilePic from "./RegisterProfilePic";
@@ -16,7 +17,7 @@ export default function JoinScreen({ navigation, route }) {
         case "emailProfile":
             return <RegisterProfilePic navigation={navigation} />;
 
-        // case "registerComplete":
-        //     return <RegisterComplete navigation={navigation} />;
+        case "registerComplete":
+            return <RegisterComplete navigation={navigation} />;
     }
 }

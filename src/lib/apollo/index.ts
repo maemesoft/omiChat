@@ -1,4 +1,5 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+import Constants from "expo-constants";
 import { cache } from "./cache";
 import { store } from "../../modules";
 
@@ -32,7 +33,7 @@ export function createApolloClient() {
     // const httpAuthLink = authLink.concat(httpLink)
 
     const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-        uri: `http://127.0.0.1:3000/graphql`,
+        uri: `${Constants.manifest.extra.OMICHAT_API}/graphql`,
         cache,
         headers: {
             Authorization: store.getState().userInfo.token || "",

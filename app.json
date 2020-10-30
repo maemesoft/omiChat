@@ -1,0 +1,10 @@
+{
+    "name": "omiChat",
+    "displayName": "omiChat",
+    "expo": {
+        "name": "omiChat",
+        "slug": "omiChat",
+        "version": "1.0.0",
+        "assetBundlePatterns": ["**/*"]
+    }
+}

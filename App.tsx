@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // Import Redux
 import { Provider } from "react-redux";
@@ -16,7 +16,16 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 // Import Screens
 import Routes from "./src/Routes";
 
+// Import Firebase
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "./firebase.json";
+import "firebase/app";
+
 const App = () => {
+    useEffect(() => {
+        initializeApp(firebaseConfig);
+    }, []);
+
     // Initialize ApolloClient Instance
     const client = createApolloClient();
 

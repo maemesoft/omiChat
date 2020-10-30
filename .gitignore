@@ -63,4 +63,4 @@ buck-out/
 .expo/*
 web-build/
 
-app.json
+firebase.json

@@ -1,0 +1,10 @@
+{
+    "apiKey": "Enter this value",
+    "authDomain": "Enter this value",
+    "databaseURL": "Enter this value",
+    "projectId": "Enter this value",
+    "storageBucket": "Enter this value",
+    "messagingSenderId": "Enter this value",
+    "appId": "Enter this value",
+    "measurementId": "Enter this value"
+}

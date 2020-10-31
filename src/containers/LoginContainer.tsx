@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
 import LoginComponent from "../components/LoginComponent";
+import useUserInfo from "../hooks/useUserInfo";
 
 export default function LoginContainer({ navigation }) {
     const GET_LOGIN = gql`
         query GetLogin($password: String!, $email: String!) {
-            getLogin(password: $password, email: $email) {
-                accountID
-            }
+            getLogin(password: $password, email: $email)
         }
     `;
 
@@ -16,12 +15,15 @@ export default function LoginContainer({ navigation }) {
 
     const [getLogin, getLoginResult] = useLazyQuery(GET_LOGIN);
 
+    const { setUserToken } = useUserInfo();
+
     useEffect(() => {
         if (getLoginResult.error) {
             console.log(getLoginResult.error);
         } else if (getLoginResult.data) {
             console.log(getLoginResult.data);
-            navigation.navigate("main");
+            setUserToken(getLoginResult.data);
+            navigation.navigate("main", { routeParam: "chat" });
         }
     }, [getLoginResult.data, getLoginResult.error]);
 

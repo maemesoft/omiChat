@@ -14,7 +14,7 @@ export default function RegisterComplete({ navigation }) {
                 </View>
                 <Button
                     onPress={() => {
-                        navigation.push("main");
+                        navigation.push("main", { routeParam: "chat" });
                     }}
                 >
                     메인화면 이동
